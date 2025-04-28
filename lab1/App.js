@@ -46,7 +46,19 @@ function NewsScreen() {
 }
 
 function GalleryScreen() {
-  return <View><Text>Екран Фотогалереї</Text></View>;
+  return (
+    <SafeAreaView style={styles.container}>
+      <View style={styles.galleryGrid}>
+        {Array(10).fill().map((_, i) => (
+          <View key={i} style={styles.galleryItemHalfWidth}>
+            <View style={styles.imagePlaceholder}>
+              <Text style={styles.placeholderText}>📷</Text>
+            </View>
+          </View>
+        ))}
+      </View>
+    </SafeAreaView>
+  );
 }
 
 function ProfileScreen() {
@@ -113,5 +125,28 @@ const styles = StyleSheet.create({
   },
   newsText: {
     fontSize: 14,
+  },
+  galleryGrid: {
+    flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    padding: 5,
+    justifyContent: 'space-between',
+  },
+  galleryItemHalfWidth: {
+    width: '48%',
+    aspectRatio: 1,
+    margin: '1%',
+    borderWidth: 1,
+    borderColor: '#ddd',
+    borderRadius: 5,
+    marginBottom: 10,
+    overflow: 'hidden',
+  },
+  imagePlaceholder: {
+    flex: 1,
+    backgroundColor: '#f0f0f0',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
