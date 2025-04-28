@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, SafeAreaView, FlatList, TextInput, TouchableOpa
 import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { Ionicons } from '@expo/vector-icons';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -41,6 +42,7 @@ function NewsScreen() {
         )}
         keyExtractor={item => item.id}
       />
+      <Text style={styles.footerText}>Прізвище ім'я та по-батькові, група</Text>
     </SafeAreaView>
   );
 }
@@ -57,6 +59,7 @@ function GalleryScreen() {
           </View>
         ))}
       </View>
+      <Text style={styles.footerText}>Прізвище ім'я та по-батькові, група</Text>
     </SafeAreaView>
   );
 }
@@ -80,6 +83,7 @@ function ProfileScreen() {
           <Text style={styles.registerButtonText}>Зареєструватися</Text>
         </TouchableOpacity>
       </View>
+      <Text style={styles.footerText}>Прізвище ім'я та по-батькові, група</Text>
     </SafeAreaView>
   );
 }
@@ -102,10 +106,46 @@ export default function App() {
       <StatusBar style="dark" />
       <SafeAreaView style={styles.safeArea}>
         <LogoHeader />
-        <Tab.Navigator>
-          <Tab.Screen name="Головна" component={NewsScreen} />
-          <Tab.Screen name="Фотогалерея" component={GalleryScreen} />
-          <Tab.Screen name="Профіль" component={ProfileScreen} />
+        <Tab.Navigator
+          screenOptions={{
+            tabBarActiveTintColor: '#0066cc',
+            tabBarInactiveTintColor: 'gray',
+            tabBarIndicatorStyle: {
+              backgroundColor: '#0066cc',
+            },
+            tabBarLabelStyle: {
+              fontSize: 12,
+              fontWeight: 'bold',
+            },
+          }}
+        >
+          <Tab.Screen
+            name="Головна"
+            component={NewsScreen}
+            options={{
+              tabBarIcon: ({ color }) => (
+                <Ionicons name="home-outline" size={20} color={color} />
+              ),
+            }}
+          />
+          <Tab.Screen
+            name="Фотогалерея"
+            component={GalleryScreen}
+            options={{
+              tabBarIcon: ({ color }) => (
+                <Ionicons name="images-outline" size={20} color={color} />
+              ),
+            }}
+          />
+          <Tab.Screen
+            name="Профіль"
+            component={ProfileScreen}
+            options={{
+              tabBarIcon: ({ color }) => (
+                <Ionicons name="person-outline" size={20} color={color} />
+              ),
+            }}
+          />
         </Tab.Navigator>
       </SafeAreaView>
     </NavigationContainer>
@@ -227,5 +267,11 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  footerText: {
+    textAlign: 'center',
+    padding: 10,
+    color: '#666',
+    fontSize: 12,
   },
 });
